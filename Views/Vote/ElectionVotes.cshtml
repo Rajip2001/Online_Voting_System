@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+@model List<Vote>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Election Votes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #007BFF; /* Blue title */
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF; /* Blue header */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .no-votes {
+            font-size: 18px;
+            color: #d9534f; /* Red color for error */
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background-color: #f8f9fa; /* Light grey background */
+            color: #007BFF; /* Blue text */
+            border: 2px solid #007BFF; /* Blue border */
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            .btn-secondary:hover {
+                background-color: #e2e6ea;
+                color: #0056b3; /* Darker blue text */
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="fw-bolder">Votes for Election</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Vote ID</th>
+                    <th>Voter ID</th>
+                    <th>Candidate ID</th>
+                    <th>Election ID</th>
+                    <th>Cast Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var vote in Model)
+                    {
+                        <tr>
+                            <td>@vote.VoteId</td>
+                            <td>@vote.VoterId</td>
+                            <td>@vote.CandidateId</td>
+                            <td>@vote.ElectionId</td>
+                            <td>@vote.CastDateTime.ToString("MM/dd/yyyy hh:mm tt")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="no-votes">No votes found for this election.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a href="@Url.Action("Index", "Vote")" class="btn-secondary">Back to Voting</a>
+    </div>
+
+</body>
+</html>

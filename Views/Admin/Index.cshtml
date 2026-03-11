@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<div>
+    <h2>Manage Elections</h2>
+    <a asp-controller="Election" asp-action="ScheduleElection" class="btn btn-primary">Create Election</a>
+    <a asp-Controller="Election" asp-action="GetAllElections" class="btn btn-secondary">View Elections</a>
+</div>
+
+<div>
+    <h2>Manage Candidates</h2>
+    <a asp-controller="Candidate" asp-action="AddCandidate" class="btn btn-primary">Register Candidate</a>
+    <a asp-Controller="Election" asp-action="ViewCandidates" class="btn btn-secondary">View Candidates</a>
+</div>
+
+<div>
+    <h2>Manage Voters</h2>
+    <a asp-action="GetVoterList" class="btn btn-secondary">View Voters</a>
+</div>
+
+
+
+@* @{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<hr />
+
+<h2>Elections</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var election in ViewBag.Elections)
+        {
+            <tr>
+                <td>@election.Name</td>
+                <td>@election.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@election.EndDate.ToString("yyyy-MM-dd")</td>
+                <td>@election.Status</td>
+                <td>
+                    @if (election.Status != "Started")
+                    {
+                        <a asp-controller="Admin" asp-action="StartElection" asp-route-electionId="@election.ElectionId" class="btn btn-success btn-sm">Start</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Admin" asp-action="EndElection" asp-route-electionId="@election.ElectionId" class="btn btn-warning btn-sm">End</a>
+                    }
+                    <a asp-controller="Admin" asp-action="DeleteElection" asp-route-electionId="@election.ElectionId" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-controller="Admin" asp-action="ElectionResult" asp-route-electionId="@election.ElectionId" class="btn btn-info btn-sm">Result</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>Candidates</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Election</th>
+            <th>Accepted</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var candidate in ViewBag.Candidates)
+        {
+            <tr>
+                <td>@candidate.Name</td>
+                <td>@candidate.Email</td>
+                <td>@candidate.ElectionId</td>
+                <td>@(candidate.IsAccepted ? "Yes" : "No")</td>
+                <td>
+                    @if (!candidate.IsAccepted)
+                    {
+                        <a asp-controller="Admin" asp-action="AcceptCandidate" asp-route-candidateId="@candidate.Id" class="btn btn-success btn-sm">Accept</a>
+                    }
+                    <a asp-controller="Admin" asp-action="DeleteCandidate" asp-route-candidateId="@candidate.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>Voters</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var voter in ViewBag.Voters)
+        {
+            <tr>
+                <td>@voter.Name</td>
+                <td>@voter.Email</td>
+            </tr>
+        }
+    </tbody>
+</table> *@

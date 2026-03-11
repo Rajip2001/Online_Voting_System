@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Schedule Election";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Online Election System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc); /* Gradient background */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: #ffffff; /* Clean white card */
+            border: none;
+            width: 400px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .btn-custom {
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient button */
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-custom:hover {
+                background: linear-gradient(to right, #2575fc, #6a11cb);
+                transform: scale(1.05); /* Subtle hover animation */
+            }
+
+        h3 {
+            color: #343a40;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2575fc;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3 class="fw-bolder" style="color:dimgray">
+            @ViewData["Title"]
+        </h3>
+        <form asp-action="ScheduleElection" method="post">
+            <div class="mb-3">
+                <label style="color:dimgray" for="Name" class="form-label fw-bolder">Election Name*</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter election name" required />
+            </div>
+            <div class="mb-3">
+                <label style="color:dimgray" for="StartDate" class="form-label fw-bolder">Start Date*</label>
+                <input type="date" class="form-control" id="StartDate" name="StartDate" required />
+            </div>
+            <div class="mb-3">
+                <label style="color:dimgray" for="EndDate" class="form-label fw-bolder">End Date*</label>
+                <input type="date" class="form-control" id="EndDate" name="EndDate" required />
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-custom">Schedule</button>
+            </div>
+        </form>
+
+        <small class="text-center mt-3">
+            <a href="@Url.Action("Index", "Election")">Back to Home Page</a>
+        </small>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

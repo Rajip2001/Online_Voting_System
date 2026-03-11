@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+@model OnlineVoting.Models.ViewModels.ResultViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results - @Model.ElectionDetails.Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Election Results for @Model.ElectionDetails.Name</h1>
+        <p>Status: @Model.ElectionDetails.Status</p>
+        <p>Election Period: @Model.ElectionDetails.StartDate.ToShortDateString() - @Model.ElectionDetails.EndDate.ToShortDateString()</p>
+        <p>Total Votes Cast: @Model.TotalVotes</p>
+        <p>Voter Turnout: @Model.TurnoutPercentage.ToString("F2")%</p>
+
+        <h2>Winner</h2>
+        @if (Model.Winner != null)
+        {
+            <p>
+                <strong>@Model.Winner.Name</strong> from the <strong>@Model.Winner.Party</strong> party won with
+                <strong>@Model.Winner.VoteCount</strong> votes.
+            </p>
+        }
+        else
+        {
+            <p>No winner yet. Election is ongoing or no votes have been cast.</p>
+        }
+
+        <h2>All Candidates</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Party</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var candidate in Model.ElectionDetails.Candidates)
+                {
+                    <tr>
+                        <td>@candidate.Name</td>
+                        <td>@candidate.Party</td>
+                        <td>@candidate.VoteCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button class="btn" onclick="location.reload()">Refresh Results</button>
+    </div>
+
+</body>
+</html>

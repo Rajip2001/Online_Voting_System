@@ -1,0 +1,68 @@
+﻿
+
+@model OnlineVoting.Models.User
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get User</title>
+</head>
+<body>
+    <h1>Search User</h1>
+
+    <form method="post" action="/User/GetUser">
+        <label for="UserId">Enter User ID:</label>
+        <input type="number" id="UserId" name="UserId" required />
+        <button type="submit">Search</button>
+    </form>
+
+    @if (Model != null)
+    {
+        <h2>User Details</h2>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr>
+                <th>User ID</th>
+                <td>@Model.UserId</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th>CNIC</th>
+                <td>@Model.CITNo</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>@Model.DOB.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>@Model.Role</td>
+            </tr>
+        </table>
+    }
+    else if (ViewData["Message"] != null)
+    {
+        <p style="color: red;">@ViewData["Message"]</p>
+    }
+
+    <br />
+    <a href="/User/UserList">Back to User List</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

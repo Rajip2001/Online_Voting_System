@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Election Management";
+}
+
+<h1>Election Management</h1>
+
+<p>Welcome to the Election Management System. Select a function below:</p>
+
+<ul>
+    <li><a href="@Url.Action("GetAllElections", "Election")">View All Elections</a></li>
+    <li><a href="@Url.Action("ScheduleElection", "Election")">Schedule a New Election</a></li>
+</ul>
+

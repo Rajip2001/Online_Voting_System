@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Election Details";
+    var election = (Election)Model;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Online Election System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc); /* Gradient background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            width: 80%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            color: #343a40;
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2575fc;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .btn-custom {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+            .btn-custom:hover {
+                background: linear-gradient(to right, #2575fc, #6a11cb);
+                transform: scale(1.05); /* Subtle hover animation */
+            }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div style="display:flex; justify-content:center">
+            <h3 class="fw-bolder" style="color:dimgray">@ViewData["Title"]</h3>
+        </div>
+        <p><strong>Name:</strong> @election.Name</p>
+        <p><strong>Status:</strong> @election.Status</p>
+        <p><strong>Start Date:</strong> @election.StartDate.ToShortDateString()</p>
+        <p><strong>End Date:</strong> @election.EndDate.ToShortDateString()</p>
+
+
+
+        <a href="@Url.Action("GetAllElections", "Election")" class="btn-custom">Back to All Elections</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Add Candidate";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Candidate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            height: 100vh;
+            padding-top : 100px;
+            padding-bottom : 100px;
+            margin:100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: white;
+            
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+            .form-group label {
+                font-weight: bold;
+                color: #343a40;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .form-control-file {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+            .alert-danger ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .alert-danger li {
+                padding: 5px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5 mb-5">
+        <h2>Add Candidate</h2>
+
+        <form asp-action="AddCandidate" asp-controller="Candidate" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" class="form-control" min="18" required />
+            </div>
+
+            <div class="form-group">
+                <label for="citno">CITNo</label>
+                <input type="text" id="citno" name="citno" class="form-control" placeholder="Citizenship Number" required />
+            </div>
+
+            <div class="form-group">
+                <label for="edu">Education</label>
+                <input type="text" id="edu" name="edu" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="party">Political Party</label>
+                <input type="text" id="party" name="party" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="profile">Profile Picture</label>
+                <input type="file" id="profile" name="profile" class="form-control-file" accept="image/*" required />
+            </div>
+
+            <div class="form-group">
+                <label for="logo">Logo</label>
+                <input type="file" id="logo" name="logo" class="form-control-file" accept="image/*" required />
+            </div>
+
+            <div class="form-group">
+                <label for="manifesto">Manifesto</label>
+                <textarea id="manifesto" name="manifesto" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Candidate</button>
+        </form>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+
+</body>
+</html>

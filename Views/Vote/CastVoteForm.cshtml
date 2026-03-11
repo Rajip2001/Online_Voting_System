@@ -1,0 +1,150 @@
+﻿@{
+    Layout = null;
+}
+@model IList<OnlineVoting.Models.Candidate>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cast Your Vote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center; /* Horizontally center content */
+            align-items: center; /* Vertically center content */
+            margin: 0; /* Remove default margin */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center content inside container */
+        }
+
+        h1 {
+            color: #007BFF; /* Blue title */
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+            button:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+            }
+
+        .btn-custom {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+            .btn-custom:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+            }
+
+        a.btn-secondary {
+            background-color: #f8f9fa; /* Light grey background */
+            color: #007BFF; /* Blue text */
+            border: 2px solid #007BFF; /* Blue border */
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            a.btn-secondary:hover {
+                background-color: #e2e6ea; /* Lighter grey on hover */
+                color: #0056b3; /* Darker blue text */
+            }
+
+        .no-candidates {
+            font-size: 18px;
+            color: #d9534f; /* Red color for error */
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            ul li {
+                margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="fw-bolder">Vote for Your Candidate</h1>
+
+        @if (Model != null && Model.Any())
+        {
+            <form id="voteForm" method="post" action="/Vote/CastVote">
+                <div>
+                    <label for="candidateId">Choose Candidate:</label>
+                    <select id="candidateId" name="candidateId" class="form-control" required>
+                        <option value="">Select Candidate</option>
+                        @foreach (var candidate in Model)
+                        {
+                            <option value="@candidate.CandidateId">@candidate.Name</option>
+                        }
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn-custom">Vote</button>
+            </form>
+        }
+        else
+        {
+            <p class="no-candidates">No candidates available for voting at the moment.</p>
+        }
+
+        @*   <ul>
+            <li><a href="@Url.Action("CandidateVotes", "Vote", new { candidateId = 2 })" class="btn-secondary">View Votes By Candidates</a></li>
+            <li><a href="@Url.Action("ElectionVotes", "Vote", new { electionId = 2 })" class="btn-secondary">View Votes By Election</a></li>
+            <li><a href="@Url.Action("GetVoteDetails", "Vote", new { id = 2 })" class="btn-secondary">Get Vote Details</a></li>
+        </ul> *@
+    </div>
+
+
+    <script>
+        document.getElementById("voteForm").addEventListener("submit", function (event) {
+            const candidateId = document.getElementById("candidateId").value;
+            if (!candidateId) {
+                alert("Please select a candidate before voting.");
+                event.preventDefault();
+            } else {
+                console.log("Submitting candidateId:", candidateId);
+            }
+        });
+    </script>
+
+</body>
+</html>
