@@ -130,6 +130,7 @@ namespace OnlineVoting.Controllers
         }
 
         [HttpGet]
+       
         public IActionResult ElectionVotes(int electionId)
         {
             var votes = _context.Votes
@@ -137,5 +138,24 @@ namespace OnlineVoting.Controllers
                                 .ToList();
             return View(votes);
         }
+        public IActionResult SelectElection()
+        {
+            var elections = _context.Elections.ToList(); // or filter active only
+
+            return View(elections);
+        }
+
+        public IActionResult ShowCandidates(int electionId)
+        {
+            var candidates = _context.Candidates
+                .Where(c => c.ElectionId == electionId)
+                .ToList();
+
+            // store election in session
+            HttpContext.Session.SetInt32("ElectionId", electionId);
+
+            return View("CastVoteForm", candidates);
+        }
+        
     }
 }

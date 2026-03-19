@@ -148,5 +148,11 @@ namespace OnlineVoting.Controllers
             var elections = _context.Elections.ToList();
             return View(elections);
         }
+
+        public IActionResult SelectElection()
+        {
+            var elections = _context.Elections.ToList();
+            return View(elections);
+        }
     }
 }

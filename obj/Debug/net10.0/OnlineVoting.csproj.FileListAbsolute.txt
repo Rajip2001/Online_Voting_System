@@ -222,3 +222,4 @@ C:\Users\Asus\Desktop\dotnet\OnlineVoting\OnlineVoting\bin\Debug\net10.0\runtime
 C:\Users\Asus\Desktop\dotnet\OnlineVoting\OnlineVoting\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Asus\Desktop\dotnet\OnlineVoting\OnlineVoting\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Asus\Desktop\dotnet\OnlineVoting\OnlineVoting\obj\Debug\net10.0\OnlineVo.FEE10F36.Up2Date
+C:\Users\Asus\Desktop\dotnet\OnlineVoting\OnlineVoting\obj\Debug\net10.0\OnlineVoting.sourcelink.json

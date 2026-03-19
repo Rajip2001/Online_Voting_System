@@ -80,27 +80,36 @@ namespace OnlineVoting.Controllers
             // Store user info in session
             HttpContext.Session.SetInt32("UserId", user.UserId);
 
+            // Admin check
             if (user.IsAdmin)
             {
-                // Admin: redirect to admin index
                 return RedirectToAction("Index", "Admin");
+            }
+
+            // Voter: get current active election
+            // Using server local time (DateTime.Now) assuming DB stores local time
+            var currentElection = _context.Elections
+                .FirstOrDefault(e => e.StartDate <= DateTime.Now && e.EndDate >= DateTime.Now);
+
+            if (currentElection != null)
+            {
+                HttpContext.Session.SetInt32("ElectionId", currentElection.ElectionId);
+                return RedirectToAction("SelectElection", "Election");
+            }
+
+            // If no current election, check if there are any elections at all
+            bool hasAnyElection = _context.Elections.Any();
+            if (hasAnyElection)
+            {
+                // Elections exist but none active right now
+                TempData["Message"] = "No election is currently active. Please check back later.";
+                return View("NoElection");
             }
             else
             {
-                // Voter: check for active election
-                var currentElection = _context.Elections
-                    .FirstOrDefault(e => e.StartDate <= DateTime.UtcNow && e.EndDate >= DateTime.UtcNow);
-
-                if (currentElection != null)
-                {
-                    HttpContext.Session.SetInt32("ElectionId", currentElection.ElectionId);
-                    return RedirectToAction("CastVoteForm", "Vote");
-                }
-                else
-                {
-                    // No election: show message
-                    return View("NoElection"); // create NoElection.cshtml view
-                }
+                // No elections exist at all
+                TempData["Message"] = "There are no elections available at the moment.";
+                return View("NoElection");
             }
         }
 
