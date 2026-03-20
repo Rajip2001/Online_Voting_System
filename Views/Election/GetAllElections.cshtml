@@ -106,7 +106,34 @@
                         <td>@election.Name</td>
                         <td>@election.Status</td>
                         <td>
-                            <a href="@Url.Action("ElectionDetails", "Election", new { electionId = election.ElectionId })">Details</a>
+                            @* <a href="@Url.Action("ElectionDetails", "Election", new { electionId = election.ElectionId })">Details</a> *@
+                             <a asp-controller="Election"
+                                asp-action="ElectionDetails"
+                                asp-route-electionId="@election.ElectionId"
+                                class="btn btn-info btn-sm">
+                                    Details
+                                </a>
+
+                                <a asp-controller="Election"
+                                asp-action="DeleteElection"
+                                asp-route-id="@election.ElectionId"
+                                class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+
+                                <a asp-controller="Candidate"
+                                asp-action="AddCandidate"
+                                asp-route-id="@election.ElectionId"
+                                class="btn btn-danger btn-sm">
+                                    Add Candidate
+                                </a>
+
+                                <a asp-controller="Election"
+                                asp-action="ViewCandidates"
+                                asp-route-id="@election.ElectionId"
+                                class="btn btn-danger btn-sm">
+                                    View Candidates
+                                </a>
                         </td>
                     </tr>
                 }

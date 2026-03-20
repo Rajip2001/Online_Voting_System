@@ -67,6 +67,7 @@
             <div class="d-grid gap-2">
                 <a asp-controller="Election" asp-action="ScheduleElection" class="btn btn-custom">Create Election</a>
                 <a asp-controller="Election" asp-action="GetAllElections" class="btn btn-custom">View Elections</a>
+                
             </div>
         </div>
 
@@ -74,8 +75,8 @@
         <div>
             <div class="section-title">Manage Candidates</div>
             <div class="d-grid gap-2">
-                <a asp-controller="Candidate" asp-action="AddCandidate" class="btn btn-custom">Register Candidate</a>
-                <a asp-controller="Election" asp-action="ViewCandidates" class="btn btn-custom">View Candidates</a>
+                @* <a asp-controller="Candidate" asp-action="AddCandidate" class="btn btn-custom">Register Candidate</a> *@
+                @* <a asp-controller="Election" asp-action="ViewCandidates" class="btn btn-custom">View Candidates</a> *@
             </div>
         </div>
 
@@ -88,13 +89,16 @@
         </div>
 
         <!-- Results -->
-        @* <div>
+        <div>
             <div class="section-title">Results</div>
             <div class="d-grid gap-2">
                 <a asp-controller="Admin" asp-action="ElectionResult" class="btn btn-custom">View Results</a>
             </div>
-        </div> *@
+        </div> 
 
+         <div class="d-grid gap-2 mt-4">
+        <a asp-controller="User" asp-action="Logout" class="btn btn-danger">Logout</a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,84 @@
+﻿@model OnlineVoting.Models.Election
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Delete Election";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Online Election System</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h3 {
+            color: dimgrey;
+        }
+
+        .btn-custom {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-container">
+        <h3 class="fw-bolder">@ViewData["Title"]</h3>
+
+        <p class="mt-3">
+            Are you sure you want to delete 
+            <strong>@Model.Name</strong>?
+        </p>
+
+        <form asp-controller="Election" asp-action="DeleteElection" method="post" class="mt-4">
+            <input type="hidden" name="ElectionId" value="@Model.ElectionId" />
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-danger">
+                    Delete
+                </button>
+
+                <a asp-controller="Election"
+                   asp-action="GetAllElections"
+                   class="btn btn-custom">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

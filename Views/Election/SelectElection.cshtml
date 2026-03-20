@@ -48,9 +48,10 @@
     @foreach (var election in Model)
     {
         <div class="d-grid">
-            <a asp-action="ViewCandidates"
-               asp-route-electionId="@election.ElectionId"
-               class="btn btn-custom">
+            <a asp-controller="Vote"
+            asp-action="CastVoteForm"
+            asp-route-electionId="@election.ElectionId"
+            class="btn btn-custom">
                 @election.Name (@election.StartDate.ToShortDateString())
             </a>
         </div>

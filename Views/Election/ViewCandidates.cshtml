@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
     ViewData["Title"] = "Candidates";
-    var candidates = (List<Candidate>)Model;
+    var candidates = (List<OnlineVoting.Models.Candidate>)Model;
 }
 
 <!DOCTYPE html>
@@ -17,91 +17,85 @@
         body {
             background: linear-gradient(to bottom right, #6a11cb, #2575fc);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 20px;
         }
 
         .card-container {
             background: #ffffff;
             border-radius: 15px;
             padding: 30px;
-            width: 800px;
+            max-width: 1000px;
+            margin: auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
-        h3 {
-            color: dimgrey;
+        .candidate-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
 
-        .table th {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            text-align: center;
+        .candidate-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
-        .table td {
-            text-align: center;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .btn-custom {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: #fff;
-            border: none;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-custom:hover {
-            background: linear-gradient(to right, #2575fc, #6a11cb);
-            transform: scale(1.05);
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="card-container">
-        <h3 class="text-center fw-bolder">@ViewData["Title"]</h3>
+<div class="card-container">
+    <h3 class="text-center mb-4">@ViewData["Title"]</h3>
 
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Party</th>
-                        <th>Votes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var candidate in candidates)
-                    {
-                        <tr>
-                            <td>@candidate.Name</td>
-                            <td>@candidate.Age</td>
-                            <td>@candidate.Party</td>
-                            <td>@candidate.VoteCount</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <!-- Back Button -->
-        <div class="text-center mt-3">
-            <a asp-controller="Admin" asp-action="Index" class="btn btn-custom">
-                ← Back to Dashboard
-            </a>
-        </div>
-        </div>
+    @if (candidates != null && candidates.Count > 0)
+    {
+        @foreach (var candidate in candidates)
+        {
+            <div class="candidate-card">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <p><strong>Profile</strong></p>
+                        <img src="@candidate.ProfilePicture" class="candidate-img" />
+                    </div>
 
-        
+                    <div class="col-md-3 text-center">
+                        <p><strong>Party Logo</strong></p>
+                        <img src="@candidate.Logo" class="logo-img" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> @candidate.Name</p>
+                        <p><strong>Age:</strong> @candidate.Age</p>
+                        <p><strong>CIT No:</strong> @candidate.CITNo</p>
+                        <p><strong>Education:</strong> @candidate.Education</p>
+                        <p><strong>Party:</strong> @candidate.Party</p>
+                        <p><strong>Votes:</strong> @candidate.VoteCount</p>
+                        <p><strong>Manifesto:</strong> @candidate.Manifesto</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">No candidates found.</p>
+    }
+
+    <div class="text-center mt-3">
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-primary">
+            ← Back to Dashboard
+        </a>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 
 </body>
 </html>

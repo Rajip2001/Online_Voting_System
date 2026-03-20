@@ -13,7 +13,7 @@ namespace OnlineVoting.Controllers
             _context = context;
         }
 
-        [HttpGet]
+       [HttpGet("Election/ViewCandidates/{electionId}")]
         public IActionResult ViewCandidates(int electionId)
         {
             var candidates = _context.Candidates
@@ -101,7 +101,7 @@ namespace OnlineVoting.Controllers
                 _context.SaveChanges();
 
                 TempData["Message"] = "Election scheduled successfully.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Admin");
             }
             catch (Exception ex)
             {
@@ -153,6 +153,41 @@ namespace OnlineVoting.Controllers
         {
             var elections = _context.Elections.ToList();
             return View(elections);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteElection(int id)
+        {
+            var election = _context.Elections.FirstOrDefault(e => e.ElectionId == id);
+
+            if (election == null)
+                return NotFound();
+
+            return View(election);
+        }
+        
+        [HttpPost, ActionName("DeleteElection")]
+        public IActionResult DeleteElectionConfirmed(int ElectionId)
+        {
+            var election = _context.Elections
+                .FirstOrDefault(e => e.ElectionId == ElectionId);
+
+            if (election != null)
+            {
+                // Step 1: Remove related candidates
+                var candidates = _context.Candidates
+                    .Where(c => c.ElectionId == ElectionId)
+                    .ToList();
+
+                _context.Candidates.RemoveRange(candidates);
+
+                // Step 2: Remove election
+                _context.Elections.Remove(election);
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("GetAllElections");
         }
     }
 }

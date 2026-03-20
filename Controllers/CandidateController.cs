@@ -14,8 +14,9 @@ namespace OnlineVoting.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddCandidate()
+        public IActionResult AddCandidate(int id)
         {
+            ViewBag.ElectionId = id;
             return View();
         }
 
@@ -28,12 +29,9 @@ namespace OnlineVoting.Controllers
             string party,
             IFormFile logo,
             IFormFile profile,
-            string manifesto)
+            string manifesto,
+            int electionId)
         {
-
-            int? electionId = HttpContext.Session.GetInt32("ElectionId");
-            int electionIdValue = electionId ?? 0;
-
             Candidate candidate = new Candidate
             {
                 Name = name,
@@ -42,9 +40,10 @@ namespace OnlineVoting.Controllers
                 Party = party,
                 Education = edu,
                 Manifesto = manifesto,
-                ElectionId = electionIdValue,
+                ElectionId = electionId,
                 VoteCount = 0
             };
+
 
             if (profile != null && profile.Length > 0 && logo != null && logo.Length > 0)
             {
@@ -86,8 +85,9 @@ namespace OnlineVoting.Controllers
             // Save candidate to database
             _context.Candidates.Add(candidate);
             await _context.SaveChangesAsync();
-
-            return RedirectToAction("Index", "Home");
+            
+            TempData["Success"] = "Candidate added successfully!";
+            return RedirectToAction("Index","Admin");
         }
     }
 }
