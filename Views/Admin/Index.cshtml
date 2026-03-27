@@ -71,15 +71,6 @@
             </div>
         </div>
 
-        <!-- Candidates -->
-        <div>
-            <div class="section-title">Manage Candidates</div>
-            <div class="d-grid gap-2">
-                @* <a asp-controller="Candidate" asp-action="AddCandidate" class="btn btn-custom">Register Candidate</a> *@
-                @* <a asp-controller="Election" asp-action="ViewCandidates" class="btn btn-custom">View Candidates</a> *@
-            </div>
-        </div>
-
         <!-- Voters -->
         <div>
             <div class="section-title">Manage Voters</div>
@@ -88,16 +79,14 @@
             </div>
         </div>
 
-        <!-- Results -->
-        <div>
-            <div class="section-title">Results</div>
-            <div class="d-grid gap-2">
-                <a asp-controller="Admin" asp-action="ElectionResult" class="btn btn-custom">View Results</a>
-            </div>
-        </div> 
 
-         <div class="d-grid gap-2 mt-4">
-        <a asp-controller="User" asp-action="Logout" class="btn btn-danger">Logout</a>
+
+        <div class="d-grid gap-2 mt-4">
+            <form asp-controller="User" asp-action="Logout" method="post">
+                <button type="submit" class="btn btn-danger w-100">
+                    Logout
+                </button>
+            </form>
         </div>
     </div>
 

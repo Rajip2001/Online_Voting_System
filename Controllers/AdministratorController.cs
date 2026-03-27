@@ -95,7 +95,7 @@ namespace OnlineVoting.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+        [HttpGet("Admin/ElectionResult/{electionId}")]
         public IActionResult ElectionResult(int electionId)
         {
             var election = _context.Elections
@@ -114,10 +114,18 @@ namespace OnlineVoting.Controllers
 
             int totalVotes = votes.Count;
 
+            // ✅ Assign VoteCount properly
+            foreach (var candidate in candidates)
+            {
+                candidate.VoteCount = votes.Count(v => v.CandidateId == candidate.CandidateId);
+            }
+
+            // ✅ Winner based on calculated VoteCount
             var winner = candidates
-                .OrderByDescending(c => votes.Count(v => v.CandidateId == c.CandidateId))
+                .OrderByDescending(c => c.VoteCount)
                 .FirstOrDefault();
 
+            // Election not ended → no winner
             if (DateTime.UtcNow < election.EndDate)
                 winner = null;
 

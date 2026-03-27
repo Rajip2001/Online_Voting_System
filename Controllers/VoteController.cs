@@ -114,18 +114,45 @@ namespace OnlineVoting.Controllers
         [HttpPost]
         public IActionResult CastVote(int candidateId, int electionId)
         {
-            var candidate = _context.Candidates
-                .FirstOrDefault(c => c.CandidateId == candidateId);
+            if (electionId <= 0)
+                return BadRequest("Invalid election");
 
-            if (candidate != null)
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
             {
-                candidate.VoteCount += 1;
-                _context.SaveChanges();
+                TempData["Error"] = "Please login to vote.";
+                return RedirectToAction("Login", "Account");
             }
 
-            return RedirectToAction("CastVoteForm", "Election", new { electionId });
+            var alreadyVoted = _context.Votes
+                .Any(v => v.UserId == userId && v.ElectionId == electionId);
+
+            if (alreadyVoted)
+            {
+                TempData["Error"] = "You already voted!";
+                return RedirectToAction("CastVoteForm", new { electionId });
+            }
+
+            var vote = new Vote
+            {
+                CandidateId = candidateId,
+                ElectionId = electionId,
+                UserId = userId.Value
+            };
+
+            _context.Votes.Add(vote);
+            _context.SaveChanges();
+
+            TempData["Success"] = "Vote submitted successfully!";
+            return RedirectToAction("VoteSuccess");
         }
-        
+
+        public IActionResult VoteSuccess()
+        {
+            return View();
+        }
+                
         // View details of a specific vote
         [HttpGet]
         public IActionResult GetVoteDetails(int id)

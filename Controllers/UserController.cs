@@ -113,10 +113,11 @@ namespace OnlineVoting.Controllers
             }
         }
 
-       [HttpGet]
+
+        [HttpPost]
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // remove all session data
+            HttpContext.Session.Clear();
             return RedirectToAction("Login", "User");
         }
 
