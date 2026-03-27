@@ -58,20 +58,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWxlY3Rpb25cR2V0QWxsRWxlY3Rpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Election/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWxlY3Rpb25cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Election/ScheduleElection.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWxlY3Rpb25cU2NoZWR1bGVFbGVjdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Election/SelectElection.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWxlY3Rpb25cU2VsZWN0RWxlY3Rpb24uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Election/UpdateElectionDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWxlY3Rpb25cVXBkYXRlRWxlY3Rpb25EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Election/ViewCandidates.cshtml]
@@ -114,10 +106,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/User/UpdateUser.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVcGRhdGVVc2VyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/User/UserList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -128,10 +116,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Vote/CastVoteForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVm90ZVxDYXN0Vm90ZUZvcm0uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Vote/GetVoteDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVm90ZVxHZXRWb3RlRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/dotnet/OnlineVoting/OnlineVoting/Views/Vote/VoteSuccess.cshtml]
